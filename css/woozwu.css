@@ -1,0 +1,75 @@
+@import "../node_modules/purecss/build/pure.css";
+
+main {
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-flow: column;
+  flex-flow: column;
+}
+
+header, div.question, div.toolbar {
+  -webkit-flex: 1 100%;
+  flex: 1 100%;
+}
+
+h1 { margin-top: 0.2em; text-align:center;}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+.button-success[disabled] { opacity:1}
+.picked[disabled] { opacity:1}
+.button-error {
+           background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+div.toolbar, header {
+  height:10vh;
+}
+div.question {
+  height:80vh;
+}
+button { height: 8vh;}
+div.answer { position: relative;}
+div.answer ul { position: absolute; top:0; left:0; z-index: 2; width: 100vw;}
+div.wrongtarget { height: 39vh; text-align:center; background-color: #333; display:-webkit-flex; display: flex;  position: absolute; top:0; margin-top:1vh; left:0; width:100vw; pointer-events: none; transition: opacity 0.3s;}
+div.target { height: 40vh; text-align:center; background-color: #333; display:-webkit-flex; display: flex; position: relative; -webkit-flex-flow:column; flex-flow:column;}
+div.target span.imageloader, div.target span.imageloader img {
+  max-height:40vh; margin: auto;
+}
+div.wrongtarget  img { max-height:39vh; margin:auto;}
+
+div.target .profile { background-color: rgba(255,255,255,0.8);  position: absolute; top:0; z-index:2; left: calc(50% - 10em); width: 20em; text-align: left; padding:0.5em;}
+
+div.correct div.target .profile { top: calc(100% + 4vh);}
+
+div.question ul { list-style: none; padding:0;}
+div.question ul li { text-aligned: center; margin: 1vh 1em;}
+div.question button { width: 100%;}
+
+div.question li { transition: transform 0.3s;}
+div.question li:nth-child(1).right {transform:  translate(0, -12.5vh);-webkit-transform:  translate(0, -12.5vh);}
+div.question li:nth-child(2).right {transform:  translate(0, -21.5vh); -webkit-transform:  translate(0, -21.5vh);}
+div.question li:nth-child(3).right {transform:  translate(0, -30.5vh); -webkit-transform:  translate(0, -30.5vh);}
+div.question li:nth-child(4).right {transform:  translate(0, -39.5vh); -webkit-transform:  translate(0, -39.5vh);}
+div.question li:nth-child(1).right.picked {transform:  translate(0, -6vh); -webkit-transform:  translate(0, -6vh);}
+div.question li:nth-child(2).right.picked {transform:  translate(0, -14vh); -webkit-transform:  translate(0, -14vh);}
+div.question li:nth-child(3).right.picked {transform:  translate(0, -23vh); -webkit-transform:  translate(0, -23vh);}
+div.question li:nth-child(4).right.picked {transform:  translate(0, -32vh); -webkit-transform:  translate(0, -32vh);}
+
+div.question li:nth-child(1).wrong {transform:  translate(0, 27vh); -webkit-transform:  translate(0, 27vh);}
+div.question li:nth-child(2).wrong {transform:  translate(0, 19vh); -webkit-transform:  translate(0, 19vh);}
+div.question li:nth-child(3).wrong {transform:  translate(0, 11vh); -webkit-transform:  translate(0, 11vh);}
+div.question li:nth-child(4).wrong {transform:  translate(0, 3vh); -webkit-transform:  translate(0, 3vh);}
+
+div.question li.other { transform: translate(-100vw, 0); -webkit-transform: translate(-100vw, 0);}
+
+
+div.question button.picked { border: thin solid black;}
+span.score { text-align: right;}
+.shown { opacity: 1}
+.hide { opacity: 0}
+
+div.toolbar {display: -webkit-flex; display: flex; -webkit-flex-flow: row; flex-flow: row}
+div.toolbar .score { -webkit-flex: 1; flex: 1;}
+div.toolbar .button-next { -webkit-flex: 4; flex: 4; height: auto;}

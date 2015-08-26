@@ -1,0 +1,45 @@
+{
+  "name": "woozwu",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "clean-css": "^3.3.8",
+    "exorcist": "^0.4.0",
+    "flux": "^2.0.3",
+    "isomorphic-fetch": "^2.1.1",
+    "nodemon": "1.4.0",
+    "normalize.css": "^3.0.3",
+    "object-assign": "^3.0.0",
+    "react": "^0.13.3",
+    "react-router": "1.0.0-beta2",
+    "request": "^2.61.0",
+    "uglifyjs": "^2.4.10",
+    "ungrid": "^1.0.1",
+    "watchify": "^3.3.1",
+    "w3capi": "^1.0.1"
+  },
+  "dependencies": {
+    "octicons": "^2.2.0",
+    "purecss": "^0.6.0",
+    "react-imageloader": "^2.1.0",    
+    "shuffle-array": "^0.1.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "scripts": {
+    "build-js-debug": "browserify js/woozwu.jsx --debug | exorcist js/woozwu.js.map > js/woozwu.js",
+    "build-js": "browserify js/woozwu.jsx | uglifyjs - -c warnings=false -m > js/woozwu.min.js",
+    "watch-js": "watchify js/woozwu.jsx --verbose --ignore-watch=\"**/node_modules/**\" --ignore-watch=\"**/js/woozwu.min.js\" -o 'uglifyjs - -c warnings=false -m > js/woozwu.min.js'",
+    "build-css": "cleancss -o ./css/woozwu.min.css ./css/woozwu.css",
+    "watch-css": "nodemon --watch css/woozwu.css --exec 'npm run build-css'",
+    "build": "npm run build-css && npm run build-js",
+    "watch": "npm run watch-css & npm run watch-js"
+  }
+}
