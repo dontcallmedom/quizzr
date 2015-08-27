@@ -13,7 +13,7 @@ var Details = React.createClass({
   },
 
   render: function () {
-    if (!__renderDOMDetails) {
+    if (typeof __renderDOMDetails === "undefined") {
       var fields = Object.keys(this.props.object).filter( p => !(p === "id" || p === "pic" || p === "name"));
       return <div className="details">
           {fields.map(
@@ -21,7 +21,6 @@ var Details = React.createClass({
           )}
         </div>;
       } else {
-        console.log(__renderDOMDetails(this.props.object));
         return <div className="details" dangerouslySetInnerHTML={{__html: __renderDOMDetails(this.props.object)}}></div>
       }
   }
