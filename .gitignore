@@ -1,7 +1,6 @@
 node_modules/
-data/key.json
-data/hashes.json
-data/persons.json
 config.json
 css/*.min.css
 js/*.min.js
+js/woozwu.js
+js/woozwu.js.map

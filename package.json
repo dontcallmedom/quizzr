@@ -1,5 +1,5 @@
 {
-  "name": "woozwu",
+  "name": "quizzr",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
@@ -16,16 +16,14 @@
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
     "react-router": "1.0.0-beta2",
-    "request": "^2.61.0",
     "uglifyjs": "^2.4.10",
     "ungrid": "^1.0.1",
-    "watchify": "^3.3.1",
-    "w3capi": "^1.0.1"
+    "watchify": "^3.3.1"
   },
   "dependencies": {
     "octicons": "^2.2.0",
     "purecss": "^0.6.0",
-    "react-imageloader": "^2.1.0",    
+    "react-imageloader": "^2.1.0",
     "shuffle-array": "^0.1.0"
   },
   "browserify": {

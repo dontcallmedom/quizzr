@@ -5,6 +5,9 @@ let config = require("../config.json");
 
 module.exports = {
     jsonHandler:    (res) => { return res.json(); }
+,   catchHandler:   (e) => {
+            console.error(e);
+    }
 ,   pathPrefix: () => {
         return config.pathPrefix;
     }

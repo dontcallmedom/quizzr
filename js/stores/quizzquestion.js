@@ -3,6 +3,7 @@ import WoozwuDispatch from "../dispatcher";
 import assign from "object-assign";
 import EventEmitter from "events";
 import PersonStore from "./person.js"
+
 const shuffle = require("shuffle-array");
 
 let _target = null,
@@ -18,8 +19,8 @@ let _target = null,
     })
 ;
 
-const randomPick = a => { return a[Math.floor(Math.random() * a.length)]};
-const removePicked = picked => { return p => p.hash !== picked.hash};
+const randomPick = a => a[Math.floor(Math.random() * a.length)];
+const removePicked = picked => { return p => p.id !== picked.id;};
 
 QuestionStore.dispatchToken = WoozwuDispatch.register((action) => {
     switch (action.type) {
@@ -28,11 +29,10 @@ QuestionStore.dispatchToken = WoozwuDispatch.register((action) => {
         WoozwuDispatch.waitFor([PersonStore.dispatchToken]);
         _pool = [];
         let persons = PersonStore.getPersons();
-        const personsWithPic = persons.filter(p => p.pic !== null);
+        const personsWithPic = persons.filter(p => p.pic != null);
         _target = randomPick(personsWithPic);
         let picked = _target;
         _pool.push(picked);
-
         // Choose 3 names from different persons randomly
         for (let i = 0 ; i < 3 ; i++) {
           persons = persons.filter(removePicked(picked));

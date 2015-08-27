@@ -39,9 +39,9 @@ div.target span.imageloader, div.target span.imageloader img {
 }
 div.wrongtarget  img { max-height:39vh; margin:auto;}
 
-div.target .profile { background-color: rgba(255,255,255,0.8);  position: absolute; top:0; z-index:2; left: calc(50% - 10em); width: 20em; text-align: left; padding:0.5em;}
+div.target .details { background-color: rgba(255,255,255,0.8);  position: absolute; top:0; z-index:2; left: calc(50% - 10em); width: 20em; text-align: left; padding:0.5em;}
 
-div.correct div.target .profile { top: calc(100% + 4vh);}
+div.correct div.target .details { top: calc(100% + 4vh);}
 
 div.question ul { list-style: none; padding:0;}
 div.question ul li { text-aligned: center; margin: 1vh 1em;}
