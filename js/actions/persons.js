@@ -1,9 +1,9 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 
 
 module.exports = {
     loadPersons:  function () {
-        WoozwuDispatch.dispatch({ type: "load-persons" });
+        QuizzrDispatch.dispatch({ type: "load-persons" });
     }
 };

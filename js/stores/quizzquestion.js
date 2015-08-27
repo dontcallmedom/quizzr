@@ -1,5 +1,5 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 import assign from "object-assign";
 import EventEmitter from "events";
 import PersonStore from "./person.js"
@@ -22,11 +22,11 @@ let _target = null,
 const randomPick = a => a[Math.floor(Math.random() * a.length)];
 const removePicked = picked => { return p => p.id !== picked.id;};
 
-QuestionStore.dispatchToken = WoozwuDispatch.register((action) => {
+QuestionStore.dispatchToken = QuizzrDispatch.register((action) => {
     switch (action.type) {
         case "new-question":
         // Choose a pic randomly
-        WoozwuDispatch.waitFor([PersonStore.dispatchToken]);
+        QuizzrDispatch.waitFor([PersonStore.dispatchToken]);
         _pool = [];
         let persons = PersonStore.getPersons();
         const personsWithPic = persons.filter(p => p.pic != null);

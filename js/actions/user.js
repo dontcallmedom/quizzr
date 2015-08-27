@@ -1,8 +1,8 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 
 module.exports = {
     pickAnswer:  function (person) {
-        WoozwuDispatch.dispatch({ type: "pick-answer", person: person });
+        QuizzrDispatch.dispatch({ type: "pick-answer", person: person });
     }
 };

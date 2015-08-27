@@ -16,6 +16,7 @@
     "object-assign": "^3.0.0",
     "react": "^0.13.3",
     "react-router": "1.0.0-beta2",
+    "serviceworker-cache-polyfill": "^3.0.0",
     "uglifyjs": "^2.4.10",
     "ungrid": "^1.0.1",
     "watchify": "^3.3.1"
@@ -32,11 +33,11 @@
     ]
   },
   "scripts": {
-    "build-js-debug": "browserify js/woozwu.jsx --debug | exorcist js/woozwu.js.map > js/woozwu.js",
-    "build-js": "browserify js/woozwu.jsx | uglifyjs - -c warnings=false -m > js/woozwu.min.js",
-    "watch-js": "watchify js/woozwu.jsx --verbose --ignore-watch=\"**/node_modules/**\" --ignore-watch=\"**/js/woozwu.min.js\" -o 'uglifyjs - -c warnings=false -m > js/woozwu.min.js'",
-    "build-css": "cleancss -o ./css/woozwu.min.css ./css/woozwu.css",
-    "watch-css": "nodemon --watch css/woozwu.css --exec 'npm run build-css'",
+    "build-js-debug": "browserify js/quizzr.jsx --debug | exorcist js/quizzr.js.map > js/quizzr.js",
+    "build-js": "browserify js/quizzr.jsx | uglifyjs - -c warnings=false -m > js/quizzr.min.js",
+    "watch-js": "watchify js/quizzr.jsx --verbose --ignore-watch=\"**/node_modules/**\" --ignore-watch=\"**/js/quizzr.min.js\" -o 'uglifyjs - -c warnings=false -m > js/quizzr.min.js'",
+    "build-css": "cleancss -o ./css/quizzr.min.css ./css/quizzr.css",
+    "watch-css": "nodemon --watch css/quizzr.css --exec 'npm run build-css'",
     "build": "npm run build-css && npm run build-js",
     "watch": "npm run watch-css & npm run watch-js"
   }

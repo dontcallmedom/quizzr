@@ -1,5 +1,5 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 import assign from "object-assign";
 import EventEmitter from "events";
 let config = require("../../config.json");
@@ -20,7 +20,7 @@ let utils = require("../utils")
     })
 ;
 
-PersonStore.dispatchToken = WoozwuDispatch.register((action) => {
+PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
     switch (action.type) {
         case "load-persons":
         fetch(config.personList)

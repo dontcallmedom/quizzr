@@ -1,12 +1,12 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 
 
 module.exports = {
     newQuestion:  function () {
-        WoozwuDispatch.dispatch({ type: "new-question" });
+        QuizzrDispatch.dispatch({ type: "new-question" });
     },
     scoreAnswer: function(right) {
-      WoozwuDispatch.dispatch({ type: "score-answer", right: right });
+      QuizzrDispatch.dispatch({ type: "score-answer", right: right });
     }
 };

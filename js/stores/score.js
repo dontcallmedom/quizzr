@@ -1,5 +1,5 @@
 
-import WoozwuDispatch from "../dispatcher";
+import QuizzrDispatch from "../dispatcher";
 import assign from "object-assign";
 import EventEmitter from "events";
 
@@ -16,7 +16,7 @@ let _total = 0,
     })
 ;
 
-ScoreStore.dispatchToken = WoozwuDispatch.register((action) => {
+ScoreStore.dispatchToken = QuizzrDispatch.register((action) => {
     switch (action.type) {
         case "new-question":
         _total++;
