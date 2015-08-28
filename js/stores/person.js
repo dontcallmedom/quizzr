@@ -16,7 +16,7 @@ let utils = require("../utils")
     ,   removeChangeListener: function (cb) { this.removeListener("change", cb); }
 
     ,   getPersons: function () {
-            return _persons.filter(p => { return p.pic != null});
+            return _persons;
         }
     ,   getOfflinePersons: function () {
             return _offlinePersons;
@@ -29,7 +29,7 @@ PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
         case "load-persons":
         fetch(config.personList)
              .then(utils.jsonHandler)
-            .then(data => { _persons = data; PersonStore.emitChange();})
+            .then(data => { _persons = data.filter(p => { return p.pic != null}); PersonStore.emitChange();})
             .catch(utils.catchHandler);
         break;
         case 'switch-offline':
@@ -48,6 +48,10 @@ PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
                 PersonStore.emit('list-offline');
               }
             );
+        break;
+        case 'load-persons-for-offline':
+          console.log(_persons.map( p => p.pic));
+          utils.sendSWMessage({command:'downloadpics', urls:_persons.map( p => p.pic)});
         break;
     }
 });

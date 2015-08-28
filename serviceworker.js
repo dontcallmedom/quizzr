@@ -78,5 +78,21 @@ self.addEventListener('message', function(event) {
         .then(function(reqs) {
            event.ports[0].postMessage( reqs.map(function(r) { return r.url;}));
          });
+    break;
+    case 'downloadpics':
+      var pics = event.data.urls || [];
+      var init = {method: 'GET', mode:'no-cors'};
+      pics.forEach(function (p) {
+        var r = new Request(p, init);
+        fetch(r).then(
+          function(response) {
+            caches.open(CACHE_PICS)
+            .then(function(cache) {
+                cache.put(r, response);
+            });
+          }
+        );
+      });
+      break;
   }
 });

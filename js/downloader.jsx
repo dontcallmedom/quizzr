@@ -30,7 +30,7 @@ export default class Downloader extends React.Component {
     return <main>
             <p>Number of questions: {this.state.persons}</p>
             <p>Number of questions available for offline usage: {this.state.offlinePersons}</p>
-            <button className="pure-button pure-button-primary" disabled={this.state.persons === this.state.offlinePersons}>Download all questions for offline usage</button>
+            <button className="pure-button pure-button-primary" disabled={this.state.persons === this.state.offlinePersons} onClick={PersonsActions.loadPersonsForOffline}>Download all questions for offline usage</button>
            </main>;
   }
 }
