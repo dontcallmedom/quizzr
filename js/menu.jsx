@@ -39,7 +39,7 @@ class MenuItem extends React.Component {
   }
 
   render () {
-    var icon = <img width="50" src={"images/" + this.props.icon + ".svg"} alt={this.props.text}/>
+    var icon = <img src={"images/" + this.props.icon + ".svg"} alt={this.props.text}/>
     if (this.props.selected) {
       return <li className="pure-menu-selected pure-menu-item pure-menu-disabled">{icon}</li>;
     } else {

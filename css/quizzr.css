@@ -11,10 +11,11 @@ nav, div.question, div.toolbar {
   -webkit-flex: 1 100%;
   flex: 1 100%;
 }
-.pure-menu-item { border-bottom: thin solid black;}
+.pure-menu-item { border-bottom: thin solid #0078e7;}
 .pure-menu-selected { background-color:#ccc; border-bottom: none}
-.pure-menu-link, ..pure-menu-disabled { padding-top: 1px;}
-
+.pure-menu-link, .pure-menu-disabled { padding-top: 1px; padding-bottom:1px;}
+.pure-menu-list { height: calc(10vh - 2px);}
+.pure-menu-item img { height:calc(10vh - 2px);}
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
 }
