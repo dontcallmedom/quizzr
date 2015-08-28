@@ -13,6 +13,7 @@ nav, div.question, div.toolbar {
 }
 .pure-menu-item { border-bottom: thin solid black;}
 .pure-menu-selected { background-color:#ccc; border-bottom: none}
+.pure-menu-link, ..pure-menu-disabled { padding-top: 1px;}
 
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
