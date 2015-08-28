@@ -33,10 +33,14 @@ export default class Toolbar extends React.Component {
         this.setState({answered: false});
     }
 
+    _newQuestion () {
+      QuizzAction.newQuestion();
+    }
+
     render () {
         var className = "button-next pure-button" + (this.state.answered ? " pure-button-primary" : "");
         return <div className="toolbar">
-              <button ref="next" className={className} disabled={!this.state.answered} onClick={QuizzAction.newQuestion}>Next</button>
+              <button ref="next" className={className} disabled={!this.state.answered} onClick={this._newQuestion}>Next</button>
               <ScoreTracker/>
               </div> ;
     }

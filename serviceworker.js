@@ -67,3 +67,14 @@ self.addEventListener('fetch', function(event) {
       })
     );
 });
+
+self.addEventListener('message', function(event) {
+  switch(event.data) {
+    case 'gotpics':
+      caches.open(CACHE_PICS)
+        .then(function(cache) {  return cache.keys();})
+        .then(function(reqs) {
+           event.ports[0].postMessage(reqs.map(function(r) { return r.url;}));
+         });
+  }
+});

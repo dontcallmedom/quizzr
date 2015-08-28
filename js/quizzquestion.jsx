@@ -7,6 +7,8 @@ import UserActions from "./actions/user";
 import QuizzActions from "./actions/quizz";
 import ScoreStore from "./stores/score";
 
+import assign from "object-assign";
+
 import Details from "./details.jsx";
 
 let utils = require("./utils");
@@ -14,7 +16,7 @@ let utils = require("./utils");
 export default class QuizzQuestion extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {answered: false};
+        this.state = {answered: false, failure: 0};
     }
 
     componentDidMount () {
@@ -30,19 +32,36 @@ export default class QuizzQuestion extends React.Component {
           if (this.state.answered) return;
           UserActions.pickAnswer(p);
           QuizzActions.scoreAnswer(p.id === this.props.person.id);
-          this.setState({answered:p});
+          this._setAnswer(p);
         }
     }
 
     _newQuestion () {
-        this.setState({answered:false});
+      this._setAnswer(false);
     }
 
+    _setAnswer(a) {
+      this._updateState("answered", a);
+    }
+
+    _updateState (name, val) {
+      var obj = {};
+      obj[name] = val;
+      this.setState(assign(this.state, obj));
+    }
 
     _showFilter(bool, trueClass, falseClass, baseClass = "")  {
        return baseClass + " " + (bool ? trueClass : falseClass);
     }
 
+    _imageFailure() {
+      this._updateState("failure", this.state.failure + 1);
+      QuizzActions.newQuestion(this.state.failure > 2);
+    }
+
+    _imageLoaded() {
+      this._updateState("failure", this.state.failure - 1);
+    }
 
     render () {
         if (this.props.person === null) {
@@ -55,12 +74,12 @@ export default class QuizzQuestion extends React.Component {
         let spinner = () => <Spinner/>;
         return <div className={"question" + (this.state.answered && this.state.answered.id === this.props.person.id ? " correct" : "")}>
           <div className="target">
-            <ImageLoader preloader={spinner} src={this.props.person.pic} alt="Person to be guessed"/>
+            <ImageLoader onLoad={this._imageLoaded.bind(this)} onError={this._imageFailure.bind(this)} preloader={spinner} src={this.props.person.pic} alt="Person to be guessed"/>
             {profile}
           </div>
           <div className="answer">
           <div className={"wrongtarget " + (this.state.answered && this.state.answered.id !== this.props.person.id ? "shown" : "hide")}>
-            <img src={this.state.answered.pic || ""} alt={this.state.answered.name || ""}/>
+            <ImageLoader src={this.state.answered.pic || ""} alt={this.state.answered.name || ""}>Picture of {this.state.answered.name} unavailable</ImageLoader>
           </div>
           <ul>
           {
