@@ -24,6 +24,13 @@ let utils = require("../utils")
     })
 ;
 
+function updateOffline(pics) {
+    _offlinePersons = _persons.filter(
+      p => pics.indexOf(p.pic) >= 0
+    );
+    PersonStore.emit('list-offline');
+}
+
 PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
     switch (action.type) {
         case "load-persons":
@@ -40,21 +47,21 @@ PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
           }
           // let's ask our service worker for available pics
           utils.sendSWMessage({command:'gotpics'})
-            .then(
-              pics => {
-                _offlinePersons = _persons.filter(
-                  p => pics.indexOf(p.pic) >= 0
-                );
-                PersonStore.emit('list-offline');
-              }
-            )
+            .then(updateOffline)
             .catch(function() {
               _offlinePersons = [];
               PersonStore.emit('list-offline');
             });
         break;
         case 'load-persons-for-offline':
-          utils.sendSWMessage({command:'downloadpics', urls:_persons.map( p => p.pic)});
+          // DRY with utils.sendSWMessage
+          var messageChannel = new MessageChannel();
+          messageChannel.port1.onmessage = function(event) {
+            updateOffline(event.data);
+          };
+          navigator.serviceWorker.controller.postMessage({command:'downloadpics',
+            urls:_persons.map( p => p.pic)}, [messageChannel.port2]);
+
         break;
     }
 });

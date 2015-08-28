@@ -87,11 +87,15 @@ self.addEventListener('message', function(event) {
         fetch(r).then(
           function(response) {
             caches.open(CACHE_PICS)
-            .then(function(cache) {
-                cache.put(r, response);
-            });
-          }
-        );
+             .then(function(cache) {
+                return cache.put(r, response)
+                  .then(function() {
+                    return cache.keys()
+                  })
+             }).then(function (reqs) {
+                event.ports[0].postMessage( reqs.map(function(r) { return r.url;}));
+             }).catch(console.error.bind(console));
+        });
       });
       break;
   }
