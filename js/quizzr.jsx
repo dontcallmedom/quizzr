@@ -6,6 +6,7 @@ import BrowserHistory from "react-router/lib/BrowserHistory";
 
 import Spinner from "../components/spinner.jsx";
 import QuizzQuestion from "./quizzquestion.jsx";
+import Downloader from "./downloader.jsx";
 import Toolbar from "./toolbar.jsx";
 import Menu from "./menu.jsx";
 
@@ -93,19 +94,11 @@ class Quizzr extends React.Component {
     }
 }
 
-class Download extends React.Component {
-  constructor (props) {
-    super(props);
-  }
-  render () {
-    return <main></main>;
-  }
-}
 
 React.render(
     <Router history={new BrowserHistory} path={pp}>
         <Route name="quizz" path={pp} component={App} indexRoute={{component:Quizzr}}>
-          <Route name="download" path="download" component={Download}/>
+          <Route name="download" path="download" component={Downloader}/>
         </Route>
     </Router>
 ,   document.body

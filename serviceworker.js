@@ -11,7 +11,7 @@ var urlsToCache = [
   pathPrefix + 'css/quizzr.min.css',
   pathPrefix + 'js/quizzr.min.js',
   pathPrefix + 'images/question.svg',
-  pathPrefix + 'images/cloud-download.svg',    
+  pathPrefix + 'images/cloud-download.svg',
 ];
 
 // Set the callback for the install step
@@ -71,12 +71,12 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('message', function(event) {
-  switch(event.data) {
+  switch(event.data.command) {
     case 'gotpics':
       caches.open(CACHE_PICS)
         .then(function(cache) {  return cache.keys();})
         .then(function(reqs) {
-           event.ports[0].postMessage(reqs.map(function(r) { return r.url;}));
+           event.ports[0].postMessage( reqs.map(function(r) { return r.url;}));
          });
   }
 });

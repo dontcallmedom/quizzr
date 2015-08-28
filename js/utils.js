@@ -34,7 +34,7 @@ module.exports = {
       // contain an error, and reject with the error if it does. If you'd prefer, it's possible to call
       // controller.postMessage() and set up the onmessage handler independently of a promise, but this is
       // a convenient wrapper.
-      return new Promise(function(resolve, reject) {
+      var p = new Promise(function(resolve, reject) {
         var messageChannel = new MessageChannel();
         messageChannel.port1.onmessage = function(event) {
           if (event.data.error) {
@@ -50,5 +50,6 @@ module.exports = {
         // See https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage
         navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2]);
       });
+      return navigator.serviceWorker.ready.then(() => p);
     }
 };

@@ -19,7 +19,7 @@ export default class QuizzQuestion extends React.Component {
     }
 
     componentWillReceiveProps() {
-      this._setAnswer(false);    
+      this._setAnswer(false);
     }
 
     _pickAnswer (p) {
@@ -47,15 +47,14 @@ export default class QuizzQuestion extends React.Component {
 
     _imageFailure() {
       this._updateState("failure", this.state.failure + 1);
-      QuizzActions.newQuestion(this.state.failure > 2);
-    }
-
-    _imageLoaded() {
-      this._updateState("failure", this.state.failure - 1);
+      if (this.state.failure > 2) {
+        QuizzActions.switchOffline();
+      }
+      QuizzActions.newCandidate();
     }
 
     render () {
-        if (this.props.person === null) {
+        if (this.props.person == null) {
           return <Spinner/>
         } else {
         let profile = "";
@@ -65,7 +64,7 @@ export default class QuizzQuestion extends React.Component {
         let spinner = () => <Spinner/>;
         return <div className={"question" + (this.state.answered && this.state.answered.id === this.props.person.id ? " correct" : "")}>
           <div className="target">
-            <ImageLoader onLoad={this._imageLoaded.bind(this)} onError={this._imageFailure.bind(this)} preloader={spinner} src={this.props.person.pic} alt="Person to be guessed"/>
+            <ImageLoader onError={this._imageFailure.bind(this)} preloader={spinner} src={this.props.person.pic} alt="Person to be guessed"/>
             {profile}
           </div>
           <div className="answer">
