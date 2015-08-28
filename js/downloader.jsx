@@ -27,6 +27,9 @@ export default class Downloader extends React.Component {
 
 
   render () {
+    if (!('serviceWorker' in navigator)) {
+      return <main><p>Sorry, your browser does not support offline.</p></main>;
+    }
     return <main>
             <p>Number of questions: {this.state.persons}</p>
             <p>Number of questions available for offline usage: {this.state.offlinePersons}</p>
