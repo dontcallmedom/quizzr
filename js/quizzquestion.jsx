@@ -5,7 +5,6 @@ import ImageLoader from 'react-imageloader';
 import Spinner from "../components/spinner.jsx";
 import UserActions from "./actions/user";
 import QuizzActions from "./actions/quizz";
-import ScoreStore from "./stores/score";
 
 import assign from "object-assign";
 
@@ -19,12 +18,8 @@ export default class QuizzQuestion extends React.Component {
         this.state = {answered: false, failure: 0};
     }
 
-    componentDidMount () {
-      ScoreStore.on("newquestion", this._newQuestion.bind(this));
-    }
-    componentWillUnmount () {
-      ScoreStore.removeListener("newquestion", this._newQuestion.bind(this));
-
+    componentWillReceiveProps() {
+      this._setAnswer(false);    
     }
 
     _pickAnswer (p) {
@@ -34,10 +29,6 @@ export default class QuizzQuestion extends React.Component {
           QuizzActions.scoreAnswer(p.id === this.props.person.id);
           this._setAnswer(p);
         }
-    }
-
-    _newQuestion () {
-      this._setAnswer(false);
     }
 
     _setAnswer(a) {
