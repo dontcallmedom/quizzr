@@ -22,11 +22,52 @@ let utils = require("./utils")
 class App extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      loaded: false,
+      person: null,
+      pool: []
+    };
+
   }
+
+  componentDidMount () {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(pp +'serviceworker.js')
+        .then(function(registration) {
+        })
+        .catch(function(err) {
+         console.error('ServiceWorker registration failed: ', err);
+       });
+    }
+    QuestionStore.addChangeListener(this._onChange.bind(this));
+    PersonStore.addChangeListener(this._onLoad.bind(this));
+    PersonsActions.loadPersons();
+  }
+
+  componentWillUnmount () {
+      QuestionStore.removeChangeListener(this._onChange.bind(this));
+      PersonStore.removeChangeListener(this._onLoad.bind(this));
+  }
+
+  _onLoad () {
+    QuizzActions.newQuestion();
+  }
+
+  _onChange () {
+        var {target, pool} = QuestionStore.getQuestion();
+        this.setState({loaded:true, person: target, pool: pool});
+  }
+
+
   render () {
+    var body = this.props.children;
+    // There ought to be a better way to set props on children??!
+    if (!this.props.children.props.route.name || this.props.children.props.route.name === "quizz") {
+       var body = <Quizzr loaded={this.state.loaded} person={this.state.person} pool={this.state.pool}/>
+    }
     return <main>
             <Menu selected={this.props.children.props.route.name || "quizz"}/>
-            {this.props.children}
+            {body}
            </main>;
   }
 
@@ -35,48 +76,14 @@ class App extends React.Component {
 class Quizzr extends React.Component {
     constructor (props) {
         super(props);
-        this.state = {
-          loaded: false,
-          person: null,
-          pool: []
-        };
-    }
-    componentDidMount () {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register(pp +'serviceworker.js')
-          .then(function(registration) {
-          })
-          .catch(function(err) {
-           console.error('ServiceWorker registration failed: ', err);
-         });
-      }
 
-      QuestionStore.addChangeListener(this._onChange.bind(this));
-      PersonStore.addChangeListener(this._onLoad.bind(this));
-      PersonsActions.loadPersons();
     }
-
-    componentWillUnmount () {
-        QuestionStore.removeChangeListener(this._onChange.bind(this));
-        PersonStore.removeChangeListener(this._onLoad.bind(this));
-    }
-
-    _onLoad () {
-      QuizzActions.newQuestion();
-    }
-
-    _onChange () {
-          var {target, pool} = QuestionStore.getQuestion();
-          this.setState({loaded:true, person: target, pool: pool});
-    }
-
     render () {
-        let st = this.state;
         var body;
-        if (!st.loaded) {
+        if (!this.props.loaded) {
           body = <Spinner/>;
         } else {
-          body = <QuizzQuestion person={st.person} pool={st.pool}/>;
+          body = <QuizzQuestion person={this.props.person} pool={this.props.pool}/>;
         }
         return  <div>
                   {body}
