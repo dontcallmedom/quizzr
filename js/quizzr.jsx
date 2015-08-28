@@ -29,10 +29,20 @@ class WoozWu extends React.Component {
         };
     }
     componentDidMount () {
-        QuestionStore.addChangeListener(this._onChange.bind(this));
-        PersonStore.addChangeListener(this._onLoad.bind(this));
-        PersonsActions.loadPersons();
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(pp +'serviceworker.js')
+          .then(function(registration) {
+          })
+          .catch(function(err) {
+           console.error('ServiceWorker registration failed: ', err);
+         });
+      }
+
+      QuestionStore.addChangeListener(this._onChange.bind(this));
+      PersonStore.addChangeListener(this._onLoad.bind(this));
+      PersonsActions.loadPersons();
     }
+
     componentWillUnmount () {
         QuestionStore.removeChangeListener(this._onChange.bind(this));
         PersonStore.removeChangeListener(this._onLoad.bind(this));
