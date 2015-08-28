@@ -7,12 +7,12 @@ main {
   flex-flow: column;
 }
 
-header, div.question, div.toolbar {
+nav, div.question, div.toolbar {
   -webkit-flex: 1 100%;
   flex: 1 100%;
 }
 
-h1 { margin-top: 0.2em; text-align:center;}
+.pure-menu-selected { background-color:#ccc;}
 
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
@@ -23,7 +23,7 @@ h1 { margin-top: 0.2em; text-align:center;}
            background: rgb(202, 60, 60); /* this is a maroon */
 }
 
-div.toolbar, header {
+div.toolbar, nav {
   height:10vh;
 }
 div.question {
@@ -37,7 +37,7 @@ div.target { height: 40vh; text-align:center; background-color: #333; display:-w
 div.target span.imageloader, div.target span.imageloader img {
   max-height:40vh; margin: auto;
 }
-div.wrongtarget  img { max-height:39vh; margin:auto;}
+div.wrongtarget  span.imageloader, div.wrongtarget  span.imageloader img { max-height:39vh; margin:auto;}
 
 div.target .details { background-color: rgba(255,255,255,0.8);  position: absolute; top:0; z-index:2; left: calc(50% - 10em); width: 20em; text-align: left; padding:0.5em;}
 

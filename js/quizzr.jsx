@@ -1,13 +1,13 @@
 
 import React from "react";
 
-import { Router, Route } from "react-router";
+import { Route, Router  } from "react-router";
 import BrowserHistory from "react-router/lib/BrowserHistory";
 
-import Application from "../components/application.jsx";
 import Spinner from "../components/spinner.jsx";
 import QuizzQuestion from "./quizzquestion.jsx";
 import Toolbar from "./toolbar.jsx";
+import Menu from "./menu.jsx";
 
 import QuizzActions from "./actions/quizz.js";
 import QuestionStore from "./stores/quizzquestion";
@@ -19,7 +19,20 @@ let utils = require("./utils")
 ,   pp = utils.pathPrefix()
 ;
 
-class WoozWu extends React.Component {
+class App extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+  render () {
+    return <main>
+            <Menu selected={this.props.children.props.route.name || "quizz"}/>
+            {this.props.children}
+           </main>;
+  }
+
+}
+
+class Quizzr extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -65,17 +78,28 @@ class WoozWu extends React.Component {
         } else {
           body = <QuizzQuestion person={st.person} pool={st.pool}/>;
         }
-        return <Application title="Who is this?">
+        return  <div>
                   {body}
                   <Toolbar/>
-                </Application>
+                 </div>
         ;
     }
 }
 
+class Download extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+  render () {
+    return <main></main>;
+  }
+}
+
 React.render(
-    <Router history={new BrowserHistory}>
-        <Route path={pp} component={WoozWu}></Route>
+    <Router history={new BrowserHistory} path={pp}>
+        <Route name="quizz" path={pp} component={App} indexRoute={{component:Quizzr}}>
+          <Route name="download" path="download" component={Download}/>
+        </Route>
     </Router>
 ,   document.body
 );
