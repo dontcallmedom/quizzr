@@ -5,3 +5,4 @@ js/*.min.js
 js/woozwu.js
 js/woozwu.js.map
 js/serviceworker-cache-polyfill.js
+images/

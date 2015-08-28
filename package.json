@@ -33,7 +33,7 @@
     ]
   },
   "scripts": {
-    "postinstall": "cp node_modules/serviceworker-cache-polyfill/index.js js/serviceworker-cache-polyfill.js",
+    "postinstall": "cp node_modules/serviceworker-cache-polyfill/index.js js/serviceworker-cache-polyfill.js; cp node_modules/octicons/svg/question.svg  node_modules/octicons/svg/cloud-download.svg images/",
     "build-js-debug": "browserify js/quizzr.jsx --debug | exorcist js/quizzr.js.map > js/quizzr.js",
     "build-js": "browserify js/quizzr.jsx | uglifyjs - -c warnings=false -m > js/quizzr.min.js",
     "watch-js": "watchify js/quizzr.jsx --verbose --ignore-watch=\"**/node_modules/**\" --ignore-watch=\"**/js/quizzr.min.js\" -o 'uglifyjs - -c warnings=false -m > js/quizzr.min.js'",

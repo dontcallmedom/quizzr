@@ -9,7 +9,9 @@ var CACHE_PICS = 'quizzr-pics';
 var urlsToCache = [
   pathPrefix,
   pathPrefix + 'css/quizzr.min.css',
-  pathPrefix + 'js/quizzr.min.js'
+  pathPrefix + 'js/quizzr.min.js',
+  pathPrefix + 'images/question.svg',
+  pathPrefix + 'images/cloud-download.svg',    
 ];
 
 // Set the callback for the install step
