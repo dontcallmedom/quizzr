@@ -47,10 +47,13 @@ PersonStore.dispatchToken = QuizzrDispatch.register((action) => {
                 );
                 PersonStore.emit('list-offline');
               }
-            );
+            )
+            .catch(function() {
+              _offlinePersons = [];
+              PersonStore.emit('list-offline');
+            });
         break;
         case 'load-persons-for-offline':
-          console.log(_persons.map( p => p.pic));
           utils.sendSWMessage({command:'downloadpics', urls:_persons.map( p => p.pic)});
         break;
     }

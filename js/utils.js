@@ -35,6 +35,9 @@ module.exports = {
       // controller.postMessage() and set up the onmessage handler independently of a promise, but this is
       // a convenient wrapper.
       var p = new Promise(function(resolve, reject) {
+        if (!navigator.serviceWorker.controller) {
+          reject(new Error("No service worker installed yet"));
+        }
         var messageChannel = new MessageChannel();
         messageChannel.port1.onmessage = function(event) {
           if (event.data.error) {

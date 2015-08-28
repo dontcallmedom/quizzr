@@ -2,6 +2,9 @@
 import React from "react";
 import { Link } from "react-router";
 
+import OnlineStateStore from "./stores/onlinestate.js"
+
+
 let utils = require("./utils")
 ,   pp = utils.pathPrefix()
 ;
@@ -17,11 +20,14 @@ export default class Menu extends React.Component {
 
 
     render () {
-
+      var download = "";
+      if (OnlineStateStore.getSWState()) {
+        download = <MenuItem icon="cloud-download" target={pp + "download"} text="Download" selected={this.props.selected === "download"}/>;
+      }
       return <nav className="pure-menu pure-menu-horizontal">
                <ul className="pure-menu-list">
                  <MenuItem icon="question" target={pp} text="Quizz" selected={this.props.selected === "quizz"}/>
-                 <MenuItem icon="cloud-download" target={pp + "download"} text="Download" selected={this.props.selected === "download"}/>
+                 {download}
                </ul>
              </nav> ;
     }
