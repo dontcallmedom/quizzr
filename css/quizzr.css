@@ -11,8 +11,8 @@ nav, div.question, div.toolbar {
   -webkit-flex: 1 100%;
   flex: 1 100%;
 }
-
-.pure-menu-selected { background-color:#ccc;}
+.pure-menu-item { border-bottom: thin solid black;}
+.pure-menu-selected { background-color:#ccc; border-bottom: none}
 
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
